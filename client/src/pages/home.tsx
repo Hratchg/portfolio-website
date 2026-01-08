@@ -125,10 +125,10 @@ export default function HomePage() {
                 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
               </p>
               <Button size="lg" asChild data-testid="button-get-in-touch">
-                <Link href="/about#contact">
+                <a href={`mailto:${personalInfo.email}`}>
                   Get In Touch
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                </a>
               </Button>
             </div>
           </section>

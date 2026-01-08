@@ -6,7 +6,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ContactSection } from "@/components/contact-section";
 import { PageWrapper } from "@/components/page-wrapper";
 import { personalInfo, aboutInfo } from "@shared/portfolio";
 import { GraduationCap, Sparkles, Target, Code2, Layers, Database, Wrench } from "lucide-react";
@@ -261,8 +260,6 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-
-        <ContactSection />
         </main>
         <Footer />
       </div>

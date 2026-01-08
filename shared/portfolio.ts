@@ -34,7 +34,7 @@ export const personalInfo = {
   name: "Hratch Ghanime",
   tagline: "Software Engineer \u2022 Data Science @ UCSB",
   intro: "I build elegant software solutions that blend engineering excellence with data-driven insights. Passionate about creating products that make a real impact.",
-  email: "hratch@example.com",
+  email: "hratchghanime@gmail.com",
   github: "https://github.com/hratchg",
   linkedin: "https://www.linkedin.com/in/hghanime",
   resumeUrl: "/resume.pdf",
