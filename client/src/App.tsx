@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/lib/theme-provider";
+import { GradientBackground } from "@/components/gradient-background";
 import AboutPage from "@/pages/about";
 import ExperiencePage from "@/pages/experience";
 import RandomFactsPage from "@/pages/random-facts";
@@ -25,8 +26,10 @@ function App() {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <GradientBackground variant="vibrant">
+            <Toaster />
+            <Router />
+          </GradientBackground>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>

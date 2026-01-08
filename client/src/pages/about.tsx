@@ -6,8 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { SkillsSection } from "@/components/skills-section";
 import { ContactSection } from "@/components/contact-section";
+import { PageWrapper } from "@/components/page-wrapper";
 import { personalInfo, aboutInfo } from "@shared/portfolio";
 import { GraduationCap, Sparkles, Target, Code2, Layers, Database, Wrench } from "lucide-react";
 import { skills, type Skill } from "@shared/portfolio";
@@ -84,25 +84,11 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1">
-        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-16">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10" />
-            <div className="absolute inset-0 opacity-30 dark:opacity-20">
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-                  backgroundSize: "40px 40px",
-                }}
-              />
-            </div>
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-          </div>
-
+    <PageWrapper>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-1">
+        <section className="relative min-h-[70vh] flex items-center justify-center pt-16">
           <div className="max-w-6xl mx-auto px-6 py-16 text-center">
             <div className="space-y-6">
               <h1
@@ -255,7 +241,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section id="skills" className="py-16 md:py-24 bg-muted/30">
+        <section id="skills" className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
             <h2
               className="text-3xl md:text-4xl font-bold mb-12"
@@ -277,8 +263,9 @@ export default function AboutPage() {
         </section>
 
         <ContactSection />
-      </main>
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
+    </PageWrapper>
   );
 }

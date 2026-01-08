@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { PageWrapper } from "@/components/page-wrapper";
 import { experiences, aboutInfo, projects } from "@shared/portfolio";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Star } from "lucide-react";
@@ -11,9 +12,10 @@ export default function ExperiencePage() {
   const featuredProjects = projects.filter((p) => p.featured);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 pt-16">
+    <PageWrapper>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-1 pt-16">
         <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
             <h1
@@ -82,7 +84,7 @@ export default function ExperiencePage() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 bg-muted/30">
+        <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
             <h2
               className="text-3xl md:text-4xl font-bold mb-4"
@@ -201,9 +203,10 @@ export default function ExperiencePage() {
               ))}
             </div>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    </PageWrapper>
   );
 }

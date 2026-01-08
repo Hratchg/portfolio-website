@@ -2,6 +2,7 @@ import { Coffee, Mountain, Crown, Globe, Music, ChefHat } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { PageWrapper } from "@/components/page-wrapper";
 import { randomFacts } from "@shared/portfolio";
 
 const iconMap: Record<string, typeof Coffee> = {
@@ -24,9 +25,10 @@ const colorMap: Record<string, string> = {
 
 export default function RandomFactsPage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 pt-16">
+    <PageWrapper>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-1 pt-16">
         <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
             <h1
@@ -78,7 +80,7 @@ export default function RandomFactsPage() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24 bg-muted/30">
+        <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Want to know more?
@@ -88,9 +90,10 @@ export default function RandomFactsPage() {
               or anything else. Feel free to reach out!
             </p>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          </section>
+        </main>
+        <Footer />
+      </div>
+    </PageWrapper>
   );
 }
