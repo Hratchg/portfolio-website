@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { User } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -14,7 +15,10 @@ export default function HomePage() {
         <main className="flex-1">
           <section className="relative min-h-[85vh] flex items-center justify-center pt-16">
             <div className="max-w-5xl mx-auto px-6 py-16 text-center">
-              <h1
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
                 data-testid="text-home-headline"
               >
@@ -23,9 +27,12 @@ export default function HomePage() {
                 Software and Scalable
                 <br />
                 Solutions
-              </h1>
+              </motion.h1>
 
-              <p
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
                 className="mt-8 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto"
                 data-testid="text-home-subtitle"
               >
@@ -34,9 +41,14 @@ export default function HomePage() {
                 <br />
                 Graduating in{" "}
                 <span className="font-semibold text-foreground">2026</span>.
-              </p>
+              </motion.p>
 
-              <div className="mt-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mt-12"
+              >
                 <Button
                   variant="outline"
                   size="lg"
@@ -49,7 +61,7 @@ export default function HomePage() {
                     About – {personalInfo.name}
                   </Link>
                 </Button>
-              </div>
+              </motion.div>
             </div>
           </section>
         </main>
