@@ -1,0 +1,119 @@
+import { useState, useEffect } from "react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "@/lib/theme-provider";
+import { navLinks, personalInfo } from "@shared/portfolio";
+
+export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      const navHeight = 64;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - navHeight,
+        behavior: "smooth",
+      });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg border-b border-border"
+          : "bg-transparent"
+      }`}
+    >
+      <nav className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between gap-4">
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="font-semibold text-lg tracking-tight"
+          data-testid="link-home"
+        >
+          {personalInfo.name.split(" ")[0]}
+        </a>
+
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Button
+              key={link.href}
+              variant="ghost"
+              size="sm"
+              onClick={() => scrollToSection(link.href)}
+              data-testid={`link-nav-${link.label.toLowerCase()}`}
+            >
+              {link.label}
+            </Button>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button
+            size="icon"
+            variant="ghost"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            data-testid="button-theme-toggle"
+          >
+            {theme === "light" ? (
+              <Moon className="h-4 w-4" />
+            ) : (
+              <Sun className="h-4 w-4" />
+            )}
+          </Button>
+
+          <Button
+            size="icon"
+            variant="ghost"
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+            data-testid="button-mobile-menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
+      </nav>
+
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border">
+          <div className="flex flex-col p-4 gap-1">
+            {navLinks.map((link) => (
+              <Button
+                key={link.href}
+                variant="ghost"
+                className="justify-start"
+                onClick={() => scrollToSection(link.href)}
+                data-testid={`link-mobile-nav-${link.label.toLowerCase()}`}
+              >
+                {link.label}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
