@@ -36,7 +36,7 @@ export const personalInfo = {
   intro: "I build elegant software solutions that blend engineering excellence with data-driven insights. Passionate about creating products that make a real impact.",
   email: "hratch@example.com",
   github: "https://github.com/hratchg",
-  linkedin: "https://linkedin.com/in/hratchg",
+  linkedin: "https://www.linkedin.com/in/hghanime",
   resumeUrl: "/resume.pdf",
 };
 
