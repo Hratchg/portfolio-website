@@ -1,0 +1,91 @@
+Use Next.js + TypeScript + Tailwind CSS (App Router).
+
+Make it fully responsive (mobile → desktop).
+
+Add subtle animations (hover states, smooth scroll, section reveal).
+
+Use accessible HTML (proper headings, aria labels where needed).
+
+Provide clear instructions in a README on how to run and deploy.
+
+Keep content data-driven: put my projects/skills in a single file like src/data/portfolio.ts and render from it.
+
+Pages / sections
+
+Home / Hero
+
+My name (placeholder “Hratch Ghanime”)
+
+Tagline: “Software Engineer • Data Science @ UCSB”
+
+Short 2–3 line intro
+
+Buttons: “View Projects”, “GitHub”, “Resume”, “Contact”
+
+About
+
+Short bio + current focus
+
+Education: UCSB (Data Science)
+
+Interests: SWE, data engineering, ML, product building
+
+Projects
+
+Grid of project cards (at least 4 placeholders) with:
+
+Title, 2–3 bullet highlights, tech stack tags
+
+Links: Live Demo (optional), GitHub Repo
+
+Add a filter by category (e.g., “All / SWE / Data / ML”)
+
+Add a search box for project titles/tech
+
+Skills
+
+Group skills by category:
+
+Languages, Frameworks, Data/ML, Tools
+
+Show as pills or compact lists
+
+Experience
+
+Timeline layout with role, org, dates, bullet impact statements
+
+Contact
+
+Contact form (client-side) with validation
+
+Buttons/icons for Email, LinkedIn, GitHub
+
+Include a footer with copyright
+
+Design details
+
+Sticky top navbar with section links
+
+Light mode by default with optional dark mode toggle
+
+Use a consistent color palette and spacing scale
+
+Add a “Featured Projects” section at top of Projects
+
+Starter project data (include these placeholders)
+
+Project 1: “LastBite” — food-waste reduction platform (React/Express/Stripe/Maps)
+
+Project 2: “Equity Drivers” — SEC + market data pipeline (Python/SQL)
+
+Project 3: “SwiftScreen” — transformer-based resume ranking (Python)
+
+Project 4: “Course Notifier Bot” — enrollment monitor (Python/Selenium)
+
+Output
+
+Generate the full codebase with file structure
+
+Make sure it runs with npm install and npm run dev
+
+Provide the commands and where to edit text (in the data file)
