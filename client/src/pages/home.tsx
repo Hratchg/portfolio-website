@@ -10,15 +10,17 @@ import { personalInfo } from "@shared/portfolio";
 export default function HomePage() {
   return (
     <PageWrapper>
-      <div className="min-h-screen flex flex-col">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="min-h-screen flex flex-col"
+      >
         <Navbar />
         <main className="flex-1">
           <section className="relative min-h-[85vh] flex items-center justify-center pt-16">
             <div className="max-w-5xl mx-auto px-6 py-16 text-center">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+              <h1
                 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight"
                 data-testid="text-home-headline"
               >
@@ -27,12 +29,9 @@ export default function HomePage() {
                 Software and Scalable
                 <br />
                 Solutions
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+              <p
                 className="mt-8 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto"
                 data-testid="text-home-subtitle"
               >
@@ -41,14 +40,9 @@ export default function HomePage() {
                 <br />
                 Graduating in{" "}
                 <span className="font-semibold text-foreground">2026</span>.
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="mt-12"
-              >
+              <div className="mt-12">
                 <Button
                   variant="outline"
                   size="lg"
@@ -61,12 +55,12 @@ export default function HomePage() {
                     About – {personalInfo.name}
                   </Link>
                 </Button>
-              </motion.div>
+              </div>
             </div>
           </section>
         </main>
         <Footer />
-      </div>
+      </motion.div>
     </PageWrapper>
   );
 }
