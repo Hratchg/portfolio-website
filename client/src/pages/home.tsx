@@ -113,25 +113,6 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section className="py-16 md:py-24">
-            <div className="max-w-4xl mx-auto px-6 text-center">
-              <h2
-                className="text-3xl md:text-4xl font-bold mb-6"
-                data-testid="text-cta-heading"
-              >
-                Let's Build Something Together
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-              </p>
-              <Button size="lg" asChild data-testid="button-get-in-touch">
-                <a href={`mailto:${personalInfo.email}`}>
-                  Get In Touch
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          </section>
         </main>
         <Footer />
       </div>
