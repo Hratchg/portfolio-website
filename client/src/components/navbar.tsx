@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme-provider";
 import { navLinks, personalInfo } from "@shared/portfolio";
@@ -7,6 +8,7 @@ import { navLinks, personalInfo } from "@shared/portfolio";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -17,50 +19,33 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      const navHeight = 64;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        top: elementPosition - navHeight,
-        behavior: "smooth",
-      });
-    }
-    setIsMobileMenuOpen(false);
-  };
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-lg border-b border-border"
-          : "bg-transparent"
+          : "bg-background/50 backdrop-blur-sm"
       }`}
     >
       <nav className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between gap-4">
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
+        <Link
+          href="/"
           className="font-semibold text-lg tracking-tight"
           data-testid="link-home"
         >
           {personalInfo.name.split(" ")[0]}
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <Button
               key={link.href}
-              variant="ghost"
+              variant={location === link.href ? "secondary" : "ghost"}
               size="sm"
-              onClick={() => scrollToSection(link.href)}
-              data-testid={`link-nav-${link.label.toLowerCase()}`}
+              asChild
+              data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
             >
-              {link.label}
+              <Link href={link.href}>{link.label}</Link>
             </Button>
           ))}
         </div>
@@ -103,12 +88,13 @@ export function Navbar() {
             {navLinks.map((link) => (
               <Button
                 key={link.href}
-                variant="ghost"
+                variant={location === link.href ? "secondary" : "ghost"}
                 className="justify-start"
-                onClick={() => scrollToSection(link.href)}
-                data-testid={`link-mobile-nav-${link.label.toLowerCase()}`}
+                asChild
+                onClick={() => setIsMobileMenuOpen(false)}
+                data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
-                {link.label}
+                <Link href={link.href}>{link.label}</Link>
               </Button>
             ))}
           </div>

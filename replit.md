@@ -1,39 +1,35 @@
 # Hratch Ghanime Portfolio
 
 ## Overview
-A modern, responsive portfolio website for Hratch Ghanime - Software Engineer and Data Science student at UCSB. Built with React, TypeScript, and Tailwind CSS.
+A modern, responsive multi-page portfolio website for Hratch Ghanime - Software Engineer and Data Science student at UCSB. Built with React, TypeScript, and Tailwind CSS.
 
 ## Current State
-MVP complete with all core sections:
-- Hero section with name, tagline, and CTA buttons
-- About section with bio, education, and interests
-- Projects section with filtering by category (All/SWE/Data/ML) and search
-- Skills section grouped by category (Languages, Frameworks, Data/ML, Tools)
-- Experience timeline with work history
-- Contact form with validation
+MVP complete with three pages:
+1. **About Me** - Hero, bio, education, skills, and contact form
+2. **Experience** - Work experience timeline, education, and featured projects
+3. **Random Facts** - Fun personal facts and interests
+
+Features include:
 - Dark/light mode toggle
-- Scroll progress indicator
 - Responsive design (mobile → desktop)
+- Navigation between pages
+- Contact form with validation
 
 ## Project Structure
 ```
 client/src/
 ├── components/
 │   ├── ui/              # Shadcn components
-│   ├── navbar.tsx       # Sticky navigation with dark mode toggle
-│   ├── hero-section.tsx # Hero with gradient background
-│   ├── about-section.tsx
-│   ├── projects-section.tsx # With filter + search
-│   ├── skills-section.tsx
-│   ├── experience-section.tsx # Timeline layout
+│   ├── navbar.tsx       # Navigation with page routing
 │   ├── contact-section.tsx # Form with validation
-│   ├── footer.tsx
-│   └── scroll-progress.tsx
+│   └── footer.tsx
 ├── lib/
 │   ├── theme-provider.tsx # Dark mode context
 │   └── queryClient.ts
 ├── pages/
-│   └── home.tsx         # Main portfolio page
+│   ├── about.tsx        # About Me page (home)
+│   ├── experience.tsx   # Work + Education page
+│   └── random-facts.tsx # Random Facts page
 └── App.tsx
 
 shared/
@@ -52,6 +48,7 @@ Edit `shared/portfolio.ts` to update:
 - `projects` - Project cards with tech stacks
 - `skills` - Skills grouped by category
 - `experiences` - Work experience timeline
+- `randomFacts` - Fun facts for the Random Facts page
 
 ## Commands
 - `npm run dev` - Start development server
