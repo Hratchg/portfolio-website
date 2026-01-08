@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Home, User, Briefcase, Sparkles } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme-provider";
 import { navLinks, personalInfo } from "@shared/portfolio";
+
+const iconMap: Record<string, typeof Home> = {
+  home: Home,
+  user: User,
+  briefcase: Briefcase,
+  sparkles: Sparkles,
+};
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,17 +44,23 @@ export function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Button
-              key={link.href}
-              variant={location === link.href ? "secondary" : "ghost"}
-              size="sm"
-              asChild
-              data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </Button>
-          ))}
+          {navLinks.map((link) => {
+            const IconComponent = iconMap[link.icon];
+            return (
+              <Button
+                key={link.href}
+                variant={location === link.href ? "secondary" : "ghost"}
+                size="sm"
+                asChild
+                data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                <Link href={link.href}>
+                  {IconComponent && <IconComponent className="h-4 w-4 mr-1.5" />}
+                  {link.label}
+                </Link>
+              </Button>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-2">
@@ -85,18 +98,24 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border">
           <div className="flex flex-col p-4 gap-1">
-            {navLinks.map((link) => (
-              <Button
-                key={link.href}
-                variant={location === link.href ? "secondary" : "ghost"}
-                className="justify-start"
-                asChild
-                onClick={() => setIsMobileMenuOpen(false)}
-                data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-              >
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
-            ))}
+            {navLinks.map((link) => {
+              const IconComponent = iconMap[link.icon];
+              return (
+                <Button
+                  key={link.href}
+                  variant={location === link.href ? "secondary" : "ghost"}
+                  className="justify-start"
+                  asChild
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  data-testid={`link-mobile-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                >
+                  <Link href={link.href}>
+                    {IconComponent && <IconComponent className="h-4 w-4 mr-2" />}
+                    {link.label}
+                  </Link>
+                </Button>
+              );
+            })}
           </div>
         </div>
       )}
