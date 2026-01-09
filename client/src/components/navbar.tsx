@@ -15,6 +15,7 @@ const iconMap: Record<string, typeof Home> = {
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
 
@@ -24,6 +25,13 @@ export function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -63,7 +71,14 @@ export function Navbar() {
           })}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <span
+            className="hidden sm:block text-sm font-mono text-muted-foreground"
+            data-testid="text-live-time"
+          >
+            {currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+          </span>
+
           <Button
             size="icon"
             variant="ghost"
