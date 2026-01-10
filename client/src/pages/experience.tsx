@@ -7,6 +7,60 @@ import { PageWrapper } from "@/components/page-wrapper";
 import { experiences, aboutInfo, projects, skills, type Skill } from "@shared/portfolio";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Star } from "lucide-react";
+import {
+  SiPython,
+  SiDjango,
+  SiJavascript,
+  SiSpringboot,
+  SiNodedotjs,
+  SiReact,
+  SiExpress,
+  SiCplusplus,
+  SiPhp,
+  SiPostgresql,
+  SiMongodb,
+  SiSupabase,
+  SiMariadb,
+  SiAmazonrds,
+  SiGithub,
+  SiDocker,
+  SiJira,
+  SiAmazonwebservices,
+  SiPostman,
+  SiKubernetes,
+  SiJenkins,
+  SiVisualstudiocode,
+  SiIntellijidea,
+} from "react-icons/si";
+import { FaJava } from "react-icons/fa";
+import type { IconType } from "react-icons";
+
+const skillIcons: Record<string, IconType> = {
+  "Python": SiPython,
+  "Django": SiDjango,
+  "JavaScript": SiJavascript,
+  "Java": FaJava,
+  "Spring Boot": SiSpringboot,
+  "Node.js": SiNodedotjs,
+  "React.js": SiReact,
+  "Express.js": SiExpress,
+  "C++": SiCplusplus,
+  "PHP": SiPhp,
+  "PostgreSQL": SiPostgresql,
+  "MongoDB Atlas": SiMongodb,
+  "Supabase": SiSupabase,
+  "MariaDB/MySQL": SiMariadb,
+  "AWS RDS": SiAmazonrds,
+  "Git/GitHub": SiGithub,
+  "Docker": SiDocker,
+  "Jira": SiJira,
+  "AWS": SiAmazonwebservices,
+  "Postman": SiPostman,
+  "Kubernetes": SiKubernetes,
+  "Jenkins": SiJenkins,
+  "VSCode": SiVisualstudiocode,
+  "IntelliJ IDEA": SiIntellijidea,
+};
 
 function SkillCategory({
   category,
@@ -24,16 +78,20 @@ function SkillCategory({
         {category}
       </h3>
       <div className="flex flex-wrap gap-2">
-        {categorySkills.map((skill) => (
-          <Badge
-            key={skill.name}
-            variant="outline"
-            className="text-sm"
-            data-testid={`badge-skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            {skill.name}
-          </Badge>
-        ))}
+        {categorySkills.map((skill) => {
+          const Icon = skillIcons[skill.name];
+          return (
+            <Badge
+              key={skill.name}
+              variant="outline"
+              className="text-sm gap-1.5"
+              data-testid={`badge-skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              {Icon && <Icon className="h-3.5 w-3.5" />}
+              {skill.name}
+            </Badge>
+          );
+        })}
       </div>
     </div>
   );
