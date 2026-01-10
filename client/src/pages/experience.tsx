@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Calendar } from "lucide-react";
+import { Briefcase, GraduationCap, Calendar, Code } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/navbar";
@@ -29,7 +29,6 @@ import {
   SiPostman,
   SiKubernetes,
   SiJenkins,
-  SiVisualstudiocode,
   SiIntellijidea,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
@@ -58,7 +57,7 @@ const skillIcons: Record<string, IconType> = {
   "Postman": SiPostman,
   "Kubernetes": SiKubernetes,
   "Jenkins": SiJenkins,
-  "VSCode": SiVisualstudiocode,
+  "VSCode": Code as IconType,
   "IntelliJ IDEA": SiIntellijidea,
 };
 
