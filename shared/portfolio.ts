@@ -183,8 +183,7 @@ export const experiences: Experience[] = [
 ];
 
 export const navLinks = [
-  { label: "Home", href: "/", icon: "home" },
-  { label: "About Me", href: "/about", icon: "user" },
+  { label: "About Me", href: "/", icon: "user" },
   { label: "Experience", href: "/experience", icon: "briefcase" },
   { label: "Random Facts", href: "/random-facts", icon: "sparkles" },
 ];

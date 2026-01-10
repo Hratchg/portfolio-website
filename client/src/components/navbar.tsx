@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, Home, User, Briefcase, Sparkles } from "lucide-react";
+import { Menu, X, Sun, Moon, User, Briefcase, Sparkles } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme-provider";
 import { navLinks, personalInfo } from "@shared/portfolio";
 
-const iconMap: Record<string, typeof Home> = {
-  home: Home,
+const iconMap: Record<string, typeof User> = {
   user: User,
   briefcase: Briefcase,
   sparkles: Sparkles,
