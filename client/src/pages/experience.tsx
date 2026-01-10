@@ -71,7 +71,7 @@ function SkillCategory({
   return (
     <div className="space-y-4">
       <h3
-        className="font-semibold text-lg text-muted-foreground"
+        className="text-[24px] font-bold text-[#f9f9f9]"
         data-testid={`text-skill-category-${category.toLowerCase().replace(/\//g, "-")}`}
       >
         {category}
