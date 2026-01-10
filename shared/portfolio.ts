@@ -33,7 +33,7 @@ export interface ContactMessage {
 export const personalInfo = {
   name: "Hratch Ghanime",
   tagline: "Software Engineer \u2022 Data Science @ UCSB",
-  intro: "I build elegant software solutions that blend engineering excellence with data-driven insights. Passionate about creating products that make a real impact.",
+  intro: "My name is Hratch Ghanime and I am currently a Data Science and Statistics student at UCSB. I work with full-stack development, machine learning with an emphasis on natural language processing, data collection and cleaning. This site includes my work experience and information on projects I've worked on. Please feel free to reach out always looking forward to connecting.",
   email: "hratchghanime@gmail.com",
   github: "https://github.com/hratchg",
   linkedin: "https://www.linkedin.com/in/hghanime",

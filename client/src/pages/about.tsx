@@ -32,7 +32,7 @@ export default function AboutPage() {
                 {personalInfo.tagline}
               </p>
               <p
-                className="max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed"
+                className="max-w-2xl mx-auto text-lg leading-relaxed text-[#fafafa]"
                 data-testid="text-hero-intro"
               >
                 {personalInfo.intro}
