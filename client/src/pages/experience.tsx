@@ -96,29 +96,37 @@ export default function ExperiencePage() {
               Academic foundation and ongoing learning.
             </p>
 
-            <Card className="max-w-2xl">
+            <Card className="max-w-3xl">
               <CardContent className="p-8">
                 <div className="flex items-start gap-6">
                   <div className="p-3 rounded-md bg-primary/10">
                     <GraduationCap className="h-8 w-8 text-primary" />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <h3
                       className="font-semibold text-xl"
                       data-testid="text-edu-school"
                     >
                       {aboutInfo.education.school}
                     </h3>
-                    <p
-                      className="text-lg text-muted-foreground"
-                      data-testid="text-edu-degree"
-                    >
-                      {aboutInfo.education.degree}
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+                      <span
+                        className="text-primary font-medium"
+                        data-testid="text-edu-degree"
+                      >
+                        {aboutInfo.education.degree}
+                      </span>
+                      <span className="text-muted-foreground">
+                        {aboutInfo.education.period}
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground" data-testid="text-edu-gpa">
+                      GPA: {aboutInfo.education.gpa}
                     </p>
-                    <Badge variant="outline">
-                      <Calendar className="h-3 w-3 mr-1" />
-                      {aboutInfo.education.period}
-                    </Badge>
+                    <p className="text-sm text-muted-foreground" data-testid="text-edu-coursework">
+                      <span className="font-medium">Relevant Coursework:</span>{" "}
+                      {aboutInfo.education.coursework.join(", ")}
+                    </p>
                   </div>
                 </div>
               </CardContent>
