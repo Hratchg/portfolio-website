@@ -19,6 +19,7 @@ export interface Experience {
   id: string;
   role: string;
   organization: string;
+  location: string;
   startDate: string;
   endDate: string;
   bullets: string[];
@@ -160,6 +161,7 @@ export const experiences: Experience[] = [
     id: "exp-1",
     role: "Software Engineering Intern",
     organization: "Tech Startup Inc.",
+    location: "Los Angeles, CA",
     startDate: "Jun 2024",
     endDate: "Sep 2024",
     bullets: [
@@ -172,6 +174,7 @@ export const experiences: Experience[] = [
     id: "exp-2",
     role: "Data Science Research Assistant",
     organization: "UCSB Data Lab",
+    location: "Santa Barbara, CA",
     startDate: "Jan 2023",
     endDate: "Present",
     bullets: [
@@ -184,6 +187,7 @@ export const experiences: Experience[] = [
     id: "exp-3",
     role: "Teaching Assistant",
     organization: "UCSB Computer Science",
+    location: "Santa Barbara, CA",
     startDate: "Sep 2022",
     endDate: "Dec 2022",
     bullets: [
