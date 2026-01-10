@@ -47,7 +47,7 @@ export function Navbar() {
           className="font-semibold text-lg tracking-tight"
           data-testid="link-home"
         >
-          {personalInfo.name.split(" ")[0]}
+          California, USA
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
