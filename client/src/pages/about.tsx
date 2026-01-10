@@ -197,15 +197,24 @@ export default function AboutPage() {
                       <div className="p-2 rounded-md bg-primary/10">
                         <GraduationCap className="h-5 w-5 text-primary" />
                       </div>
-                      <div>
-                        <h3 className="font-semibold" data-testid="text-education-school">
+                      <div className="space-y-2">
+                        <h3 className="font-semibold text-lg" data-testid="text-education-school">
                           {aboutInfo.education.school}
                         </h3>
-                        <p className="text-muted-foreground" data-testid="text-education-degree">
-                          {aboutInfo.education.degree}
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                          <span className="text-primary font-medium" data-testid="text-education-degree">
+                            {aboutInfo.education.degree}
+                          </span>
+                          <span className="text-muted-foreground" data-testid="text-education-period">
+                            {aboutInfo.education.period}
+                          </span>
+                        </div>
+                        <p className="text-muted-foreground" data-testid="text-education-gpa">
+                          GPA: {aboutInfo.education.gpa}
                         </p>
-                        <p className="text-sm text-muted-foreground" data-testid="text-education-period">
-                          {aboutInfo.education.period}
+                        <p className="text-sm text-muted-foreground" data-testid="text-education-coursework">
+                          <span className="font-medium">Relevant Coursework:</span>{" "}
+                          {aboutInfo.education.coursework.join(", ")}
                         </p>
                       </div>
                     </div>
