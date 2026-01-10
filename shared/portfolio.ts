@@ -12,7 +12,7 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  category: "Languages" | "Frameworks" | "Data/ML" | "Tools";
+  category: "Languages/Frameworks" | "Database Technologies" | "Cloud/Dev Tools";
 }
 
 export interface Experience {
@@ -129,30 +129,30 @@ export const projects: Project[] = [
 ];
 
 export const skills: Skill[] = [
-  { name: "Python", category: "Languages" },
-  { name: "TypeScript", category: "Languages" },
-  { name: "JavaScript", category: "Languages" },
-  { name: "SQL", category: "Languages" },
-  { name: "Java", category: "Languages" },
-  { name: "C++", category: "Languages" },
-  { name: "React", category: "Frameworks" },
-  { name: "Node.js", category: "Frameworks" },
-  { name: "Express", category: "Frameworks" },
-  { name: "FastAPI", category: "Frameworks" },
-  { name: "Next.js", category: "Frameworks" },
-  { name: "TailwindCSS", category: "Frameworks" },
-  { name: "PyTorch", category: "Data/ML" },
-  { name: "TensorFlow", category: "Data/ML" },
-  { name: "Pandas", category: "Data/ML" },
-  { name: "Scikit-learn", category: "Data/ML" },
-  { name: "Spark", category: "Data/ML" },
-  { name: "Airflow", category: "Data/ML" },
-  { name: "Git", category: "Tools" },
-  { name: "Docker", category: "Tools" },
-  { name: "AWS", category: "Tools" },
-  { name: "PostgreSQL", category: "Tools" },
-  { name: "MongoDB", category: "Tools" },
-  { name: "Linux", category: "Tools" },
+  { name: "Python", category: "Languages/Frameworks" },
+  { name: "Django", category: "Languages/Frameworks" },
+  { name: "JavaScript", category: "Languages/Frameworks" },
+  { name: "Java", category: "Languages/Frameworks" },
+  { name: "Spring Boot", category: "Languages/Frameworks" },
+  { name: "Node.js", category: "Languages/Frameworks" },
+  { name: "React.js", category: "Languages/Frameworks" },
+  { name: "Express.js", category: "Languages/Frameworks" },
+  { name: "C++", category: "Languages/Frameworks" },
+  { name: "PHP", category: "Languages/Frameworks" },
+  { name: "PostgreSQL", category: "Database Technologies" },
+  { name: "MongoDB Atlas", category: "Database Technologies" },
+  { name: "Supabase", category: "Database Technologies" },
+  { name: "MariaDB/MySQL", category: "Database Technologies" },
+  { name: "AWS RDS", category: "Database Technologies" },
+  { name: "Git/GitHub", category: "Cloud/Dev Tools" },
+  { name: "Docker", category: "Cloud/Dev Tools" },
+  { name: "Jira", category: "Cloud/Dev Tools" },
+  { name: "AWS", category: "Cloud/Dev Tools" },
+  { name: "Postman", category: "Cloud/Dev Tools" },
+  { name: "Kubernetes", category: "Cloud/Dev Tools" },
+  { name: "Jenkins", category: "Cloud/Dev Tools" },
+  { name: "VSCode", category: "Cloud/Dev Tools" },
+  { name: "IntelliJ IDEA", category: "Cloud/Dev Tools" },
 ];
 
 export const experiences: Experience[] = [

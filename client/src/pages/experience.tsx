@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Calendar, Code2, Layers, Database, Wrench } from "lucide-react";
+import { Briefcase, GraduationCap, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/navbar";
@@ -8,20 +8,6 @@ import { experiences, aboutInfo, projects, skills, type Skill } from "@shared/po
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Star } from "lucide-react";
 
-const categoryIcons = {
-  Languages: Code2,
-  Frameworks: Layers,
-  "Data/ML": Database,
-  Tools: Wrench,
-};
-
-const categoryColors = {
-  Languages: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-  Frameworks: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
-  "Data/ML": "bg-green-500/10 text-green-600 dark:text-green-400",
-  Tools: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
-};
-
 function SkillCategory({
   category,
   categorySkills,
@@ -29,27 +15,20 @@ function SkillCategory({
   category: Skill["category"];
   categorySkills: Skill[];
 }) {
-  const Icon = categoryIcons[category];
-
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <div className={`p-2 rounded-md ${categoryColors[category]}`}>
-          <Icon className="h-5 w-5" />
-        </div>
-        <h3
-          className="font-semibold text-lg"
-          data-testid={`text-skill-category-${category.toLowerCase().replace(/\//g, "-")}`}
-        >
-          {category}
-        </h3>
-      </div>
+      <h3
+        className="font-semibold text-lg text-muted-foreground"
+        data-testid={`text-skill-category-${category.toLowerCase().replace(/\//g, "-")}`}
+      >
+        {category}
+      </h3>
       <div className="flex flex-wrap gap-2">
         {categorySkills.map((skill) => (
           <Badge
             key={skill.name}
-            variant="secondary"
-            className="font-mono text-sm"
+            variant="outline"
+            className="text-sm"
             data-testid={`badge-skill-${skill.name.toLowerCase().replace(/\s+/g, "-")}`}
           >
             {skill.name}
@@ -75,10 +54,9 @@ export default function ExperiencePage() {
   );
 
   const categoryOrder: Skill["category"][] = [
-    "Languages",
-    "Frameworks",
-    "Data/ML",
-    "Tools",
+    "Languages/Frameworks",
+    "Database Technologies",
+    "Cloud/Dev Tools",
   ];
 
   return (
@@ -289,10 +267,10 @@ export default function ExperiencePage() {
                 className="text-3xl md:text-4xl font-bold mb-12"
                 data-testid="text-skills-heading"
               >
-                Skills
+                Technical Skills
               </h2>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+              <div className="space-y-10">
                 {categoryOrder.map((category) => (
                   <SkillCategory
                     key={category}
