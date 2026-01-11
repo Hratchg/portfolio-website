@@ -126,9 +126,7 @@ export default function ExperiencePage() {
             <h1
               className="text-4xl md:text-5xl font-bold mb-12"
               data-testid="text-experience-page-heading"
-            >
-              Work Experience
-            </h1>
+            >Related Experience</h1>
 
             <div className="space-y-16">
               {experiences.map((exp) => (
