@@ -185,15 +185,14 @@ export const experiences: Experience[] = [
   },
   {
     id: "exp-3",
-    role: "Teaching Assistant",
-    organization: "UCSB Computer Science",
-    location: "Santa Barbara, CA",
-    startDate: "Sep 2022",
-    endDate: "Dec 2022",
+    role: "Student Engineering Intern",
+    organization: "Go Baby Go",
+    location: "Glendale, California",
+    startDate: "February 2024",
+    endDate: "July 2024",
     bullets: [
-      "Assisted 150+ students in introductory programming courses",
-      "Held weekly office hours and created supplementary learning materials",
-      "Received 4.8/5.0 average rating from student feedback",
+      "Redesigned four wheels, incorporating omnidirectional motion technology to improve maneuverability for children with mobility impairments; achieved 100% compliance with all relevant safety standards for children's rideable toys",
+      "Collaborated with engineers and therapists to collect and analyze user feedback data to improve design and safety features",
     ],
   },
 ];
