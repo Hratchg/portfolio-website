@@ -1,59 +1,179 @@
-import { type User, type InsertUser, type ContactMessage } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { eq, asc } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
+import {
+  personalInfo,
+  aboutInfo,
+  projects,
+  experiences,
+  skills,
+  randomFacts,
+  navLinks,
+  contactMessages,
+  adminUser,
+  type ContactMessage,
+} from "@shared/schema";
 
-export interface StoredContactMessage extends ContactMessage {
-  id: string;
-  createdAt: Date;
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+export const db = drizzle(pool);
+
+// --- Read operations (public) ---
+
+export async function getPersonalInfo() {
+  const rows = await db.select().from(personalInfo).where(eq(personalInfo.id, "main"));
+  return rows[0] ?? null;
 }
 
-export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
-  createContactMessage(message: ContactMessage): Promise<StoredContactMessage>;
-  getContactMessages(): Promise<StoredContactMessage[]>;
+export async function getAboutInfo() {
+  const rows = await db.select().from(aboutInfo).where(eq(aboutInfo.id, "main"));
+  return rows[0] ?? null;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private contactMessages: Map<string, StoredContactMessage>;
-
-  constructor() {
-    this.users = new Map();
-    this.contactMessages = new Map();
-  }
-
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
-  }
-
-  async createContactMessage(message: ContactMessage): Promise<StoredContactMessage> {
-    const id = randomUUID();
-    const storedMessage: StoredContactMessage = {
-      ...message,
-      id,
-      createdAt: new Date(),
-    };
-    this.contactMessages.set(id, storedMessage);
-    return storedMessage;
-  }
-
-  async getContactMessages(): Promise<StoredContactMessage[]> {
-    return Array.from(this.contactMessages.values());
-  }
+export async function getProjects() {
+  return db.select().from(projects).orderBy(asc(projects.sortOrder));
 }
 
-export const storage = new MemStorage();
+export async function getExperiences() {
+  return db.select().from(experiences).orderBy(asc(experiences.sortOrder));
+}
+
+export async function getSkills() {
+  return db.select().from(skills).orderBy(asc(skills.sortOrder));
+}
+
+export async function getRandomFacts() {
+  return db.select().from(randomFacts).orderBy(asc(randomFacts.sortOrder));
+}
+
+export async function getNavLinks() {
+  return db.select().from(navLinks).orderBy(asc(navLinks.sortOrder));
+}
+
+// --- Write operations (protected) ---
+
+export async function updatePersonalInfo(data: Partial<typeof personalInfo.$inferInsert>) {
+  await db.update(personalInfo).set(data).where(eq(personalInfo.id, "main"));
+}
+
+export async function updateAboutInfo(data: Partial<typeof aboutInfo.$inferInsert>) {
+  await db.update(aboutInfo).set(data).where(eq(aboutInfo.id, "main"));
+}
+
+export async function createProject(data: typeof projects.$inferInsert) {
+  const rows = await db.insert(projects).values(data).returning();
+  return rows[0];
+}
+
+export async function updateProject(id: string, data: Partial<typeof projects.$inferInsert>) {
+  await db.update(projects).set(data).where(eq(projects.id, id));
+}
+
+export async function deleteProject(id: string) {
+  await db.delete(projects).where(eq(projects.id, id));
+}
+
+export async function createExperience(data: typeof experiences.$inferInsert) {
+  const rows = await db.insert(experiences).values(data).returning();
+  return rows[0];
+}
+
+export async function updateExperience(id: string, data: Partial<typeof experiences.$inferInsert>) {
+  await db.update(experiences).set(data).where(eq(experiences.id, id));
+}
+
+export async function deleteExperience(id: string) {
+  await db.delete(experiences).where(eq(experiences.id, id));
+}
+
+export async function createSkill(data: typeof skills.$inferInsert) {
+  const rows = await db.insert(skills).values(data).returning();
+  return rows[0];
+}
+
+export async function updateSkill(id: string, data: Partial<typeof skills.$inferInsert>) {
+  await db.update(skills).set(data).where(eq(skills.id, id));
+}
+
+export async function deleteSkill(id: string) {
+  await db.delete(skills).where(eq(skills.id, id));
+}
+
+export async function createRandomFact(data: typeof randomFacts.$inferInsert) {
+  const rows = await db.insert(randomFacts).values(data).returning();
+  return rows[0];
+}
+
+export async function updateRandomFact(id: string, data: Partial<typeof randomFacts.$inferInsert>) {
+  await db.update(randomFacts).set(data).where(eq(randomFacts.id, id));
+}
+
+export async function deleteRandomFact(id: string) {
+  await db.delete(randomFacts).where(eq(randomFacts.id, id));
+}
+
+export async function createNavLink(data: typeof navLinks.$inferInsert) {
+  const rows = await db.insert(navLinks).values(data).returning();
+  return rows[0];
+}
+
+export async function updateNavLink(id: string, data: Partial<typeof navLinks.$inferInsert>) {
+  await db.update(navLinks).set(data).where(eq(navLinks.id, id));
+}
+
+export async function deleteNavLink(id: string) {
+  await db.delete(navLinks).where(eq(navLinks.id, id));
+}
+
+// --- Contact messages ---
+
+export async function createContactMessage(data: ContactMessage) {
+  const rows = await db.insert(contactMessages).values(data).returning();
+  return rows[0];
+}
+
+// --- Admin ---
+
+export async function getAdminUser() {
+  const rows = await db.select().from(adminUser).where(eq(adminUser.id, "admin"));
+  return rows[0] ?? null;
+}
+
+// --- Batch update (transactional) ---
+
+const tableMap = {
+  personal_info: { table: personalInfo, idCol: personalInfo.id },
+  about_info: { table: aboutInfo, idCol: aboutInfo.id },
+  projects: { table: projects, idCol: projects.id },
+  experiences: { table: experiences, idCol: experiences.id },
+  skills: { table: skills, idCol: skills.id },
+  random_facts: { table: randomFacts, idCol: randomFacts.id },
+  nav_links: { table: navLinks, idCol: navLinks.id },
+} as const;
+
+type TableName = keyof typeof tableMap;
+
+interface BatchPayload {
+  updates?: Array<{ table: TableName; id: string; data: Record<string, unknown> }>;
+  creates?: Array<{ table: TableName; data: Record<string, unknown> }>;
+  deletes?: Array<{ table: TableName; id: string }>;
+}
+
+export async function executeBatch(payload: BatchPayload) {
+  await db.transaction(async (tx) => {
+    for (const op of payload.updates ?? []) {
+      const entry = tableMap[op.table];
+      await tx.update(entry.table).set(op.data as any).where(eq(entry.idCol, op.id));
+    }
+    for (const op of payload.creates ?? []) {
+      const entry = tableMap[op.table];
+      await tx.insert(entry.table).values(op.data as any);
+    }
+    for (const op of payload.deletes ?? []) {
+      const entry = tableMap[op.table];
+      await tx.delete(entry.table).where(eq(entry.idCol, op.id));
+    }
+  });
+}
