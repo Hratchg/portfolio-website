@@ -17,7 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { personalInfo } from "@shared/portfolio";
+import { useContent } from "@/lib/use-content";
+import type { PersonalInfo } from "@/lib/types";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -30,6 +31,8 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export function ContactSection() {
+  const { data: personalInfo } = useContent<PersonalInfo>("/api/content/personal-info");
+  if (!personalInfo) return null;
   const { toast } = useToast();
 
   const form = useForm<ContactFormData>({

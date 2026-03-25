@@ -1,9 +1,12 @@
 import { Github } from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
 import { Button } from "@/components/ui/button";
-import { personalInfo } from "@shared/portfolio";
+import { useContent } from "@/lib/use-content";
+import type { PersonalInfo } from "@/lib/types";
 
 export function Footer() {
+  const { data: personalInfo } = useContent<PersonalInfo>("/api/content/personal-info");
+  if (!personalInfo) return null;
   const currentYear = new Date().getFullYear();
 
   return (

@@ -3,7 +3,8 @@ import { Menu, X, Sun, Moon, User, Briefcase, Sparkles } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme-provider";
-import { navLinks, personalInfo } from "@shared/portfolio";
+import { useContent } from "@/lib/use-content";
+import type { NavLink, PersonalInfo } from "@/lib/types";
 
 const iconMap: Record<string, typeof User> = {
   user: User,
@@ -17,6 +18,8 @@ export function Navbar() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [location] = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { data: navLinksData } = useContent<NavLink[]>("/api/content/nav-links");
+  const currentNavLinks = navLinksData ?? [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +54,7 @@ export function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => {
+          {currentNavLinks.map((link) => {
             const IconComponent = iconMap[link.icon];
             return (
               <Button
@@ -112,7 +115,7 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border">
           <div className="flex flex-col p-4 gap-1">
-            {navLinks.map((link) => {
+            {currentNavLinks.map((link) => {
               const IconComponent = iconMap[link.icon];
               return (
                 <Button
