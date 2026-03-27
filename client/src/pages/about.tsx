@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { PageWrapper } from "@/components/page-wrapper";
+import { RevealFx } from "@/components/reveal-fx";
 import { Sparkles, Target, Loader2 } from "lucide-react";
 import { useContent } from "@/lib/use-content";
 import { Editable } from "@/components/editable";
@@ -18,22 +18,20 @@ export default function AboutPage() {
 
   if (piLoading || aiLoading || !personalInfo || !aboutInfo) {
     return (
-      <PageWrapper>
-        <div className="min-h-screen flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
-      </PageWrapper>
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
     );
   }
 
   return (
-    <PageWrapper>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1">
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">
         <section className="relative min-h-[70vh] flex items-center justify-center pt-16">
           <div className="max-w-6xl mx-auto px-6 py-16 text-center">
             <div className="space-y-6">
+              <RevealFx delay={0} translateY={20}>
               <Editable
                 value={personalInfo.name}
                 table="personal_info"
@@ -43,6 +41,8 @@ export default function AboutPage() {
                 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight"
                 data-testid="text-hero-name"
               />
+              </RevealFx>
+              <RevealFx delay={0.2} translateY={24}>
               <Editable
                 value={personalInfo.tagline}
                 table="personal_info"
@@ -52,17 +52,21 @@ export default function AboutPage() {
                 className="text-xl sm:text-2xl text-muted-foreground font-medium"
                 data-testid="text-hero-tagline"
               />
+              </RevealFx>
+              <RevealFx delay={0.4} translateY={28}>
               <Editable
                 value={personalInfo.intro}
                 table="personal_info"
                 id="main"
                 field="intro"
                 as="p"
-                className="max-w-2xl mx-auto text-lg leading-relaxed text-[#fafafa]"
+                className="max-w-2xl mx-auto text-lg leading-relaxed text-muted-foreground"
                 data-testid="text-hero-intro"
               />
+              </RevealFx>
             </div>
 
+            <RevealFx delay={0.6} translateY={20}>
             <div className="flex flex-wrap items-center justify-center gap-4 mt-12">
               <Button size="lg" asChild data-testid="button-view-experience">
                 <Link href="/experience">
@@ -83,7 +87,9 @@ export default function AboutPage() {
                 </a>
               </Button>
             </div>
+            </RevealFx>
 
+            <RevealFx delay={0.8} translateY={16}>
             <div className="flex justify-center gap-4 mt-8">
               <Button size="icon" variant="ghost" asChild aria-label="LinkedIn" data-testid="button-linkedin">
                 <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
@@ -96,9 +102,11 @@ export default function AboutPage() {
                 </a>
               </Button>
             </div>
+            </RevealFx>
           </div>
         </section>
 
+        <RevealFx delay={1.0} translateY={32}>
         <section id="about" className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-bold mb-12" data-testid="text-about-heading">
@@ -158,10 +166,10 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+        </RevealFx>
 
         </main>
         <Footer />
       </div>
-    </PageWrapper>
   );
 }

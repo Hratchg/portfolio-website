@@ -1,9 +1,10 @@
-import { Briefcase, GraduationCap, Calendar, Code } from "lucide-react";
+import { Briefcase, GraduationCap, Calendar, Code, MapPin, Mail } from "lucide-react";
+import { SiLinkedin } from "react-icons/si";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { PageWrapper } from "@/components/page-wrapper";
+import { RevealFx } from "@/components/reveal-fx";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Star } from "lucide-react";
 import { useContent } from "@/lib/use-content";
@@ -12,7 +13,7 @@ import { EditableList, DeleteButton } from "@/components/editable-list";
 import { EditableBullets } from "@/components/editable-bullets";
 import { EditableSelect, EditableToggle } from "@/components/editable-select";
 import { useEditMode } from "@/lib/edit-context";
-import type { Experience, AboutInfo, Project, Skill } from "@/lib/types";
+import type { Experience, AboutInfo, Project, Skill, PersonalInfo } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import {
   SiPython,
@@ -84,7 +85,7 @@ function SkillCategory({
   return (
     <div className="space-y-4">
       <h3
-        className="text-[24px] font-bold text-[#f9f9f9]"
+        className="text-[24px] font-bold text-foreground"
         data-testid={`text-skill-category-${category.toLowerCase().replace(/\//g, "-")}`}
       >
         {category}
@@ -131,30 +132,25 @@ function SkillCategory({
 export default function ExperiencePage() {
   const { data: experiencesData, isLoading: expLoading } = useContent<Experience[]>("/api/content/experiences");
   const { data: aboutInfoData, isLoading: aboutLoading } = useContent<AboutInfo>("/api/content/about");
-  const { data: projectsData, isLoading: projLoading } = useContent<Project[]>("/api/content/projects");
   const { data: skillsData, isLoading: skillsLoading } = useContent<Skill[]>("/api/content/skills");
+  const { data: personalInfo, isLoading: piLoading } = useContent<PersonalInfo>("/api/content/personal-info");
   const { changes, addChange, isEditMode } = useEditMode();
 
-  if (expLoading || aboutLoading || projLoading || skillsLoading) {
+  if (expLoading || aboutLoading || skillsLoading || piLoading) {
     return (
-      <PageWrapper>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-1 pt-16 flex items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          </main>
-          <Footer />
-        </div>
-      </PageWrapper>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-1 pt-20 flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
     );
   }
 
   const experiences = experiencesData ?? [];
   const aboutInfo = aboutInfoData;
-  const allProjects = projectsData ?? [];
   const skills = skillsData ?? [];
-
-  const featuredProjects = allProjects.filter((p) => p.featured);
 
   const isDeleted = (table: string, id: string) =>
     changes.some((c) => c.type === "delete" && c.table === table && c.id === id);
@@ -184,14 +180,6 @@ export default function ExperiencePage() {
     });
   };
 
-  const handleAddProject = () => {
-    addChange({
-      type: "create",
-      table: "projects",
-      data: { title: "New Project", description: "Description", highlights: [], techStack: [], category: "SWE", featured: false, githubUrl: null, liveUrl: null, sortOrder: (projectsData?.length ?? 0) },
-    });
-  };
-
   const handleAddSkill = (category: Skill["category"]) => {
     addChange({
       type: "create",
@@ -207,16 +195,85 @@ export default function ExperiencePage() {
   };
 
   return (
-    <PageWrapper>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1 pt-16">
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1 pt-20">
+        {/* Two-column header like Matthew's about page */}
+        {personalInfo && (
+          <section className="py-12 md:py-20">
+            <div className="max-w-6xl mx-auto px-6">
+              <div className="flex flex-col md:flex-row gap-10 md:gap-16">
+                {/* Left sidebar — avatar, location, languages */}
+                <div className="flex flex-col items-center md:items-start gap-4 md:w-52 flex-shrink-0">
+                  <div className="w-36 h-36 rounded-full overflow-hidden">
+                    <img src="/profile.jpg" alt={personalInfo.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="h-4 w-4 text-primary/70" />
+                    California, USA
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="outline" className="rounded-full px-3 py-1 text-xs">English</Badge>
+                    <Badge variant="outline" className="rounded-full px-3 py-1 text-xs">Armenian</Badge>
+                    <Badge variant="outline" className="rounded-full px-3 py-1 text-xs">Arabic</Badge>
+                  </div>
+                </div>
+
+                {/* Right content — name, title, social, bio */}
+                <div className="flex-1">
+                  <RevealFx delay={0} translateY={16}>
+                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
+                      {personalInfo.name}
+                    </h1>
+                  </RevealFx>
+                  <RevealFx delay={0.15} translateY={16}>
+                    <p className="text-2xl md:text-3xl text-muted-foreground mt-2">
+                      Student · Data Scientist · Software Engineer
+                    </p>
+                  </RevealFx>
+
+                  <RevealFx delay={0.3} translateY={16}>
+                    <div className="flex flex-wrap gap-3 mt-6">
+                      <Button variant="outline" className="rounded-full gap-2" asChild>
+                        <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
+                          <SiLinkedin className="h-4 w-4" />
+                          LinkedIn
+                        </a>
+                      </Button>
+                      <Button variant="outline" className="rounded-full gap-2" asChild>
+                        <a href={`mailto:${personalInfo.email}`}>
+                          <Mail className="h-4 w-4" />
+                          Email
+                        </a>
+                      </Button>
+                      <Button variant="outline" className="rounded-full gap-2" asChild>
+                        <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
+                          <Github className="h-4 w-4" />
+                          GitHub
+                        </a>
+                      </Button>
+                    </div>
+                  </RevealFx>
+
+                  <RevealFx delay={0.45} translateY={20}>
+                    <p className="text-base text-foreground leading-relaxed mt-8 max-w-2xl">
+                      I am currently a Data Science and Statistics student at UCSB. I work with full-stack development, machine learning with an emphasis on natural language processing, data collection and cleaning. This site includes my work experience and information on projects I've worked on. Please feel free to reach out always looking forward to connecting.
+                    </p>
+                  </RevealFx>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
+            <RevealFx delay={0.6} translateY={20}>
             <h1
               className="text-4xl md:text-5xl font-bold mb-12"
               data-testid="text-experience-page-heading"
-            >Related Experience</h1>
+            >Work Experience</h1>
+            </RevealFx>
 
             <EditableList table="experiences" onAdd={handleAddExperience} addLabel="Add Experience">
               <div className="space-y-16">
@@ -318,95 +375,6 @@ export default function ExperiencePage() {
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
-          <div className="max-w-6xl mx-auto px-6">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              data-testid="text-projects-heading"
-            >
-              Featured Projects
-            </h2>
-            <p className="text-lg text-muted-foreground mb-12">
-              Highlighted work from my portfolio.
-            </p>
-
-            <EditableList table="projects" onAdd={handleAddProject} addLabel="Add Project">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {featuredProjects.map((project) => (
-                  <Card
-                    key={project.id}
-                    className={`flex flex-col h-full transition-transform duration-200 hover:-translate-y-1 relative group ${isDeleted("projects", project.id) ? "opacity-50 pointer-events-none" : ""}`}
-                    data-testid={`card-project-${project.id}`}
-                  >
-                    <DeleteButton table="projects" id={project.id} label="project" />
-                    <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-t-md flex items-center justify-center">
-                      <span className="text-4xl font-bold text-primary/30">
-                        {project.title[0]}
-                      </span>
-                    </div>
-                    <CardContent className="flex-1 p-6">
-                      <div className="flex items-start justify-between gap-2 mb-2">
-                        <Editable value={project.title} table="projects" id={project.id} field="title" as="h3" className="font-semibold text-lg" />
-                        <Badge variant="secondary" className="flex-shrink-0">
-                          <Star className="h-3 w-3 mr-1" />
-                          Featured
-                        </Badge>
-                      </div>
-                      <Editable value={project.description} table="projects" id={project.id} field="description" as="p" className="text-sm text-muted-foreground mb-4" />
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.techStack.slice(0, 4).map((tech) => (
-                          <Badge
-                            key={tech}
-                            variant="outline"
-                            className="font-mono text-xs"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                      <EditableSelect
-                        value={project.category}
-                        options={["SWE", "Data", "ML"]}
-                        table="projects"
-                        id={project.id}
-                        field="category"
-                        className="text-xs text-muted-foreground mb-2"
-                      />
-                      <EditableToggle value={project.featured} table="projects" id={project.id} field="featured" label="Featured" />
-                      <div className="flex gap-2 mt-2">
-                        {project.githubUrl && (
-                          <Button size="sm" variant="outline" asChild>
-                            <a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <Github className="h-4 w-4 mr-1" />
-                              Code
-                            </a>
-                          </Button>
-                        )}
-                        {project.liveUrl && (
-                          <Button size="sm" asChild>
-                            <a
-                              href={project.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <ExternalLink className="h-4 w-4 mr-1" />
-                              Live
-                            </a>
-                          </Button>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </EditableList>
-          </div>
-          </section>
-
           <section id="skills" className="py-16 md:py-24">
             <div className="max-w-6xl mx-auto px-6">
               <h2
@@ -433,6 +401,5 @@ export default function ExperiencePage() {
         </main>
         <Footer />
       </div>
-    </PageWrapper>
   );
 }

@@ -11,7 +11,7 @@ import { EditBar } from "@/components/edit-bar";
 import { GradientBackground } from "@/components/gradient-background";
 import AboutPage from "@/pages/about";
 import ExperiencePage from "@/pages/experience";
-import RandomFactsPage from "@/pages/random-facts";
+import ProjectsPage from "@/pages/projects";
 import AdminLoginPage from "@/pages/admin-login";
 import NotFound from "@/pages/not-found";
 
@@ -31,7 +31,7 @@ function Router() {
     <Switch>
       <Route path="/" component={AboutPage} />
       <Route path="/experience" component={ExperiencePage} />
-      <Route path="/random-facts" component={RandomFactsPage} />
+      <Route path="/projects" component={ProjectsPage} />
       <Route path="/admin-login" component={AdminLoginPage} />
       <Route path="/admin-logout" component={AdminLogoutPage} />
       <Route component={NotFound} />

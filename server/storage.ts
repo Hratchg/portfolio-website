@@ -9,7 +9,6 @@ import {
   projects,
   experiences,
   skills,
-  randomFacts,
   navLinks,
   contactMessages,
   adminUser,
@@ -44,10 +43,6 @@ export async function getExperiences() {
 
 export async function getSkills() {
   return db.select().from(skills).orderBy(asc(skills.sortOrder));
-}
-
-export async function getRandomFacts() {
-  return db.select().from(randomFacts).orderBy(asc(randomFacts.sortOrder));
 }
 
 export async function getNavLinks() {
@@ -103,19 +98,6 @@ export async function deleteSkill(id: string) {
   await db.delete(skills).where(eq(skills.id, id));
 }
 
-export async function createRandomFact(data: typeof randomFacts.$inferInsert) {
-  const rows = await db.insert(randomFacts).values(data).returning();
-  return rows[0];
-}
-
-export async function updateRandomFact(id: string, data: Partial<typeof randomFacts.$inferInsert>) {
-  await db.update(randomFacts).set(data).where(eq(randomFacts.id, id));
-}
-
-export async function deleteRandomFact(id: string) {
-  await db.delete(randomFacts).where(eq(randomFacts.id, id));
-}
-
 export async function createNavLink(data: typeof navLinks.$inferInsert) {
   const rows = await db.insert(navLinks).values(data).returning();
   return rows[0];
@@ -151,7 +133,6 @@ const tableMap = {
   projects: { table: projects, idCol: projects.id },
   experiences: { table: experiences, idCol: experiences.id },
   skills: { table: skills, idCol: skills.id },
-  random_facts: { table: randomFacts, idCol: randomFacts.id },
   nav_links: { table: navLinks, idCol: navLinks.id },
 } as const;
 

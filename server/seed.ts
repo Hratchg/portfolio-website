@@ -6,7 +6,6 @@ import {
   projects as projectsTable,
   experiences as experiencesTable,
   skills as skillsTable,
-  randomFacts as randomFactsTable,
   navLinks as navLinksTable,
   adminUser as adminUserTable,
 } from "@shared/schema";
@@ -16,7 +15,6 @@ import {
   projects,
   experiences,
   skills,
-  randomFacts,
   navLinks,
 } from "@shared/portfolio";
 
@@ -84,17 +82,6 @@ export async function seed() {
       id: randomUUID(),
       name: s.name,
       category: s.category,
-      sortOrder: i,
-    });
-  }
-
-  for (let i = 0; i < randomFacts.length; i++) {
-    const f = randomFacts[i];
-    await db.insert(randomFactsTable).values({
-      id: f.id,
-      emoji: f.emoji,
-      title: f.title,
-      description: f.description,
       sortOrder: i,
     });
   }

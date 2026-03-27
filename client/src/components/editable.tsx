@@ -6,7 +6,7 @@ interface EditableProps {
   table: string;
   id: string;
   field: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: "span" | "p" | "h1" | "h2" | "h3" | "h4" | "div" | "li" | "a";
   className?: string;
   "data-testid"?: string;
 }

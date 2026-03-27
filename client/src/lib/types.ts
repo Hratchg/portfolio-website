@@ -54,14 +54,6 @@ export interface Skill {
   sortOrder: number;
 }
 
-export interface RandomFact {
-  id: string;
-  emoji: string;
-  title: string;
-  description: string;
-  sortOrder: number;
-}
-
 export interface NavLink {
   id: string;
   label: string;

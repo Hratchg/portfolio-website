@@ -7,7 +7,6 @@ import {
   getProjects,
   getExperiences,
   getSkills,
-  getRandomFacts,
   getNavLinks,
   createContactMessage,
   updatePersonalInfo,
@@ -21,9 +20,6 @@ import {
   createSkill,
   updateSkill,
   deleteSkill,
-  createRandomFact,
-  updateRandomFact,
-  deleteRandomFact,
   createNavLink,
   updateNavLink,
   deleteNavLink,
@@ -66,11 +62,6 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
 
   app.get("/api/content/skills", async (_req, res) => {
     const data = await getSkills();
-    return res.json(data);
-  });
-
-  app.get("/api/content/random-facts", async (_req, res) => {
-    const data = await getRandomFacts();
     return res.json(data);
   });
 
@@ -145,21 +136,6 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
 
   app.delete("/api/content/skills/:id", requireAuth, async (req, res) => {
     await deleteSkill(req.params.id);
-    return res.json({ message: "Deleted" });
-  });
-
-  app.post("/api/content/random-facts", requireAuth, async (req, res) => {
-    const fact = await createRandomFact(req.body);
-    return res.json(fact);
-  });
-
-  app.put("/api/content/random-facts/:id", requireAuth, async (req, res) => {
-    await updateRandomFact(req.params.id, req.body);
-    return res.json({ message: "Updated" });
-  });
-
-  app.delete("/api/content/random-facts/:id", requireAuth, async (req, res) => {
-    await deleteRandomFact(req.params.id);
     return res.json({ message: "Deleted" });
   });
 
