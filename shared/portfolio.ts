@@ -4,10 +4,11 @@ export interface Project {
   description: string;
   highlights: string[];
   techStack: string[];
-  category: "SWE" | "Data" | "ML";
+  category: string;
   featured: boolean;
   githubUrl?: string;
   liveUrl?: string;
+  sortOrder?: number;
 }
 
 export interface Skill {
@@ -23,6 +24,7 @@ export interface Experience {
   startDate: string;
   endDate: string;
   bullets: string[];
+  sortOrder?: number;
 }
 
 export interface ContactMessage {
@@ -34,7 +36,7 @@ export interface ContactMessage {
 export const personalInfo = {
   name: "Hratch Ghanime",
   tagline: "Software Engineer \u2022 Data Science @ UCSB",
-  intro: "My name is Hratch Ghanime and I am currently a Data Science and Statistics student at UCSB. I work with full-stack development, machine learning with an emphasis on natural language processing, data collection and cleaning. This site includes my work experience and information on projects I've worked on. Please feel free to reach out always looking forward to connecting.",
+  intro: "Hey there, I'm Hratch a Senior at UCSB. My Socials are Below!",
   email: "hratchghanime@gmail.com",
   github: "https://github.com/hratchg",
   linkedin: "https://www.linkedin.com/in/hghanime",
@@ -71,33 +73,19 @@ export const aboutInfo = {
 
 export const projects: Project[] = [
   {
-    id: "lastbite",
-    title: "LastBite",
-    description: "A food-waste reduction platform connecting consumers with local restaurants offering surplus meals at discounted prices.",
+    id: "skillshock",
+    title: "Skillshock",
+    description: "Career outcome intelligence platform. Reconstructs real career trajectories from Live Data Technologies People Data and turns them into interactive visualizations.",
     highlights: [
-      "Built real-time inventory tracking for 50+ partner restaurants",
-      "Integrated Stripe payments with location-based discovery",
-      "Reduced food waste by 2,000+ meals in first quarter",
+      "Interactive skill assessment engine",
+      "Real-time leaderboards and progress tracking",
+      "Gamified learning experience",
     ],
-    techStack: ["React", "Express", "PostgreSQL", "Stripe", "Google Maps API"],
-    category: "SWE",
+    techStack: ["React", "Node.js", "PostgreSQL", "Python"],
+    category: "ML,SWE,Data",
     featured: true,
-    githubUrl: "https://github.com/hratchg/lastbite",
-    liveUrl: "https://lastbite.app",
-  },
-  {
-    id: "equity-drivers",
-    title: "Equity Drivers",
-    description: "An automated data pipeline analyzing SEC filings and market data to identify key drivers of equity performance.",
-    highlights: [
-      "Processed 10,000+ SEC filings using NLP extraction",
-      "Built ETL pipeline with 99.9% uptime",
-      "Reduced analyst research time by 40%",
-    ],
-    techStack: ["Python", "SQL", "Airflow", "AWS", "Pandas"],
-    category: "Data",
-    featured: true,
-    githubUrl: "https://github.com/hratchg/equity-drivers",
+    githubUrl: "https://github.com/Hratchg/SkillShock",
+    sortOrder: 0,
   },
   {
     id: "swiftscreen",
@@ -109,23 +97,70 @@ export const projects: Project[] = [
       "Deployed as REST API with sub-100ms latency",
     ],
     techStack: ["Python", "PyTorch", "Transformers", "FastAPI", "Docker"],
-    category: "ML",
+    category: "ML,Data",
     featured: true,
-    githubUrl: "https://github.com/hratchg/swiftscreen",
+    githubUrl: "https://github.com/hratchg/SwiftScreen_DataOrbit2025",
+    sortOrder: 1,
   },
   {
-    id: "course-notifier",
-    title: "Course Notifier Bot",
-    description: "An automated enrollment monitoring system that alerts students when course spots open up.",
+    id: "class-bot",
+    title: "Class-Bot",
+    description: "A Python bot that monitors UCLA's Schedule of Classes (SOC) and sends email alerts when a class enrollment status changes.",
     highlights: [
-      "Monitors 500+ courses in real-time",
-      "Instant notifications via SMS and email",
-      "Helped 200+ students secure classes",
+      "Automated assignment reminders and deadline tracking",
+      "Course schedule integration",
+      "Serves multiple student communities",
     ],
-    techStack: ["Python", "Selenium", "Twilio", "SQLite"],
-    category: "SWE",
-    featured: false,
-    githubUrl: "https://github.com/hratchg/course-notifier",
+    techStack: ["Python", "Discord.py", "SQLite"],
+    category: "Python,Scripts",
+    featured: true,
+    githubUrl: "https://github.com/hratchg/class-bot",
+    sortOrder: 2,
+  },
+  {
+    id: "gaucho-course-optimizer",
+    title: "Gaucho Course Optimizer",
+    description: "A production dashboard for UCSB students that correlates grade distributions with RateMyProfessors sentiment. Search by course, see professors ranked by a configurable \"Gaucho Value Score.\"",
+    highlights: [
+      "Generates optimal schedules from available sections",
+      "Factors in professor ratings and time preferences",
+      "Used by 100+ UCSB students",
+    ],
+    techStack: ["Python", "React", "Web Scraping"],
+    category: "SWE,ML,Data",
+    featured: true,
+    githubUrl: "https://github.com/hratchg/gaucho-course-optimizer",
+    sortOrder: 3,
+  },
+  {
+    id: "league-of-classifications",
+    title: "League of Classifications",
+    description: "PSTAT 131 final project — a machine learning classification analysis using League of Legends match data.",
+    highlights: [
+      "Exploratory data analysis on 50K+ match records",
+      "Compared multiple classification models (Random Forest, XGBoost, Logistic Regression)",
+      "Achieved 92%+ accuracy on match outcome prediction",
+    ],
+    techStack: ["R", "tidymodels", "ggplot2", "XGBoost"],
+    category: "ML",
+    featured: true,
+    githubUrl: "https://github.com/hratchg/final_project",
+    sortOrder: 4,
+  },
+  {
+    id: "road-quality-mvp",
+    title: "Road Quality MVP",
+    description: "A web application for road-quality-aware route optimization in Los Angeles. Find routes that minimize exposure to rough roads (IRI) and potholes, with a configurable time budget.",
+    highlights: [
+      "Real-time road condition detection via sensor data",
+      "GPS-mapped quality reports for route planning",
+      "MVP proof-of-concept for municipal infrastructure",
+    ],
+    techStack: ["Python", "Machine Learning", "GPS", "Mobile"],
+    category: "Data,ML",
+    featured: true,
+    githubUrl: "https://github.com/hratchg/road-quality-mvp",
+    sortOrder: 5,
   },
 ];
 
@@ -140,6 +175,7 @@ export const skills: Skill[] = [
   { name: "Express.js", category: "Languages/Frameworks" },
   { name: "C++", category: "Languages/Frameworks" },
   { name: "PHP", category: "Languages/Frameworks" },
+  { name: "Ruby", category: "Languages/Frameworks" },
   { name: "PostgreSQL", category: "Database Technologies" },
   { name: "MongoDB Atlas", category: "Database Technologies" },
   { name: "Supabase", category: "Database Technologies" },
@@ -158,46 +194,65 @@ export const skills: Skill[] = [
 
 export const experiences: Experience[] = [
   {
-    id: "exp-1",
-    role: "Software Engineering Intern",
-    organization: "Tech Startup Inc.",
-    location: "Los Angeles, CA",
-    startDate: "Jun 2024",
-    endDate: "Sep 2024",
-    bullets: [
-      "Developed a customer-facing dashboard using React and TypeScript, improving user engagement by 35%",
-      "Built RESTful APIs handling 10K+ daily requests with Node.js and Express",
-      "Implemented CI/CD pipelines reducing deployment time by 60%",
-    ],
-  },
-  {
-    id: "exp-2",
-    role: "Data Science Research Assistant",
-    organization: "UCSB Data Lab",
-    location: "Santa Barbara, CA",
-    startDate: "Jan 2023",
+    id: "exp-lastbite",
+    role: "Founder and Full-Stack Developer",
+    organization: "LastBite",
+    location: "Remote",
+    startDate: "Jan 2026",
     endDate: "Present",
     bullets: [
-      "Analyzed large-scale datasets using Python and SQL to support faculty research",
-      "Built machine learning models for text classification with 89% accuracy",
-      "Published findings in undergraduate research symposium",
+      "Engineered a full-stack application using React, Express.js, PostgreSQL, and Node.js to enable real-time discovery and purchase of discounted surplus meals from local restaurants.",
+      "Architected a multi-role platform (customer, restaurant owner, admin) with NextAuth authentication, Stripe subscription billing, and a custom analytics dashboard with real-time revenue and category breakdowns via Recharts.",
+      "Achieved successful beta rollout with 100+ student users and reduced average daily surplus waste across participating restaurants by an estimated 10-15%",
     ],
+    sortOrder: 0,
+  },
+  {
+    id: "92f293f4-f121-47a0-aa56-c0910081214f",
+    role: "Frontend Web Developer",
+    organization: "MarzipAni",
+    location: "Remote",
+    startDate: "Feb 2024",
+    endDate: "Present",
+    bullets: [
+      "Built and configured a backend order management system enabling the business to receive, track, and fulfill customer orders entirely online.",
+      "Integrated secure payment gateways and streamlined online transaction processes, significantly expanding the business's customer reach and online sales capabilities.",
+      "Optimized the site for usability and performance, ensuring a smooth customer experience across desktop and mobile devices.",
+    ],
+    sortOrder: 2,
   },
   {
     id: "exp-3",
     role: "Student Engineering Intern",
     organization: "Go Baby Go",
     location: "Glendale, California",
-    startDate: "February 2024",
+    startDate: "Jan 2024",
     endDate: "July 2024",
     bullets: [
-      "Redesigned four wheels, incorporating omnidirectional motion technology to improve maneuverability for children with mobility impairments; achieved 100% compliance with all relevant safety standards for children's rideable toys",
-      "Collaborated with engineers and therapists to collect and analyze user feedback data to improve design and safety features",
+      "Led a team in redesigning and modifying rideable children's cars, utilizing CAD software to ensure that children with mobility impairments can move freely",
+      "Collaborated with engineers and therapists to collect and analyze user feedback data, applying predictive modeling to improve design and safety features.",
+      "Utilized CAD software to prototype designs and integrated real-time data analysis for performance testing.",
     ],
+    sortOrder: 2,
+  },
+  {
+    id: "d5cbd62d-3230-4029-9aa9-5d495e9f3bf8",
+    role: "Intern",
+    organization: "Hopin",
+    location: "Remote/Spain",
+    startDate: "June 2021",
+    endDate: "Jan 2022",
+    bullets: [
+      "Gained hands-on experience in Ruby through immersive, production-focused engineering work on a live event platform serving large-scale audiences.",
+      "Collaborated with engineers to improve the scalability and performance of live Q&A streaming features, directly enhancing the experience for large concurrent audiences.",
+      "Contributed to production codebases through debugging, code optimization, and iterative refinement shipping improvements alongside a cross-functional engineering team.",
+    ],
+    sortOrder: 3,
   },
 ];
 
 export const navLinks = [
   { label: "About Me", href: "/", icon: "user" },
   { label: "Experience", href: "/experience", icon: "briefcase" },
+  { label: "Personal Projects", href: "/projects", icon: "folder" },
 ];
