@@ -1,5 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+import dns from "dns";
+dns.setDefaultResultOrder("ipv4first");
 
 process.on("uncaughtException", (err) => {
   console.error("UNCAUGHT EXCEPTION:", err.message);
