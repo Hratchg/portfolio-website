@@ -1,5 +1,18 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err.message);
+  console.error(err.stack);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("UNHANDLED REJECTION:", reason instanceof Error ? reason.message : reason);
+  if (reason instanceof Error) console.error(reason.stack);
+  process.exit(1);
+});
+
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
@@ -85,6 +98,11 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  if (!process.env.DATABASE_URL) {
+    console.error("FATAL: DATABASE_URL environment variable is not set");
+    process.exit(1);
+  }
+
   // Seed database on first run
   await seed();
 
