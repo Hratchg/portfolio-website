@@ -36,7 +36,7 @@ export interface ContactMessage {
 export const personalInfo = {
   name: "Hratch Ghanime",
   tagline: "Software Engineer \u2022 Data Science @ UCSB",
-  intro: "Hey there, I'm Hratch a Senior at UCSB. My Socials are Below!",
+  intro: "Hey there, I'm Hratch a senior at UCSB. My socials are below!",
   email: "hratchghanime@gmail.com",
   github: "https://github.com/hratchg",
   linkedin: "https://www.linkedin.com/in/hghanime",
