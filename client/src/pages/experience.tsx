@@ -204,7 +204,8 @@ export default function ExperiencePage() {
             <div className="max-w-6xl mx-auto px-6">
               <div className="flex flex-col md:flex-row gap-10 md:gap-16">
                 {/* Left sidebar — avatar, location, languages */}
-                <div className="flex flex-col items-center md:items-start gap-4 md:w-52 flex-shrink-0">
+                <RevealFx delay={0} translateY={16} className="md:w-52 flex-shrink-0">
+                <div className="flex flex-col items-center md:items-start gap-4">
                   <div className="w-36 h-36 rounded-full overflow-hidden">
                     <img src="/profile.jpg" alt={personalInfo.name} className="w-full h-full object-cover" />
                   </div>
@@ -218,6 +219,7 @@ export default function ExperiencePage() {
                     <Badge variant="outline" className="rounded-full px-3 py-1 text-xs">Arabic</Badge>
                   </div>
                 </div>
+                </RevealFx>
 
                 {/* Right content — name, title, social, bio */}
                 <div className="flex-1">
@@ -326,6 +328,7 @@ export default function ExperiencePage() {
 
         <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
+            <RevealFx delay={1.65} translateY={20}>
             <h2
               className="text-3xl md:text-4xl font-bold mb-4"
               data-testid="text-education-heading"
@@ -335,8 +338,10 @@ export default function ExperiencePage() {
             <p className="text-lg text-muted-foreground mb-12">
               Academic foundation and ongoing learning.
             </p>
+            </RevealFx>
 
             {aboutInfo && (
+              <RevealFx delay={1.8} translateY={20}>
               <Card className="max-w-3xl">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-6">
@@ -372,29 +377,33 @@ export default function ExperiencePage() {
                   </div>
                 </CardContent>
               </Card>
+              </RevealFx>
             )}
           </div>
         </section>
 
           <section id="skills" className="py-16 md:py-24">
             <div className="max-w-6xl mx-auto px-6">
+              <RevealFx delay={1.95} translateY={20}>
               <h2
                 className="text-3xl md:text-4xl font-bold mb-12"
                 data-testid="text-skills-heading"
               >
                 Technical Skills
               </h2>
+              </RevealFx>
 
               <div className="space-y-10">
-                {categoryOrder.map((category) => (
+                {categoryOrder.map((category, j) => (
+                  <RevealFx key={category} delay={2.1 + j * 0.15} translateY={20}>
                   <SkillCategory
-                    key={category}
                     category={category}
                     categorySkills={(groupedSkills[category] || []).filter((s) => !isDeleted("skills", s.id))}
                     isEditMode={isEditMode}
                     onAddSkill={handleAddSkill}
                     onDeleteSkill={handleDeleteSkill}
                   />
+                  </RevealFx>
                 ))}
               </div>
             </div>
