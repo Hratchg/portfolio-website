@@ -230,7 +230,7 @@ export default function ExperiencePage() {
                   </RevealFx>
                   <RevealFx delay={0.15} translateY={16}>
                     <p className="text-2xl md:text-3xl text-muted-foreground mt-2">
-                      Student · Data Scientist · Software Engineer
+                      Data Scientist · Software Engineer
                     </p>
                   </RevealFx>
 
@@ -259,7 +259,7 @@ export default function ExperiencePage() {
 
                   <RevealFx delay={0.45} translateY={20}>
                     <p className="text-base text-foreground leading-relaxed mt-8 max-w-2xl">
-                      I am currently a Data Science and Statistics student at UCSB. I work with full-stack development, machine learning with an emphasis on natural language processing, data collection and cleaning. This site includes my work experience and information on projects I've worked on. Please feel free to reach out always looking forward to connecting.
+                      I recently graduated from UCSB with a degree in Data Science and Statistics. I work with full-stack development, machine learning with an emphasis on natural language processing, data collection and cleaning. This site includes my work experience and information on projects I've worked on. Please feel free to reach out always looking forward to connecting.
                     </p>
                   </RevealFx>
                 </div>

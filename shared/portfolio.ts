@@ -36,7 +36,7 @@ export interface ContactMessage {
 export const personalInfo = {
   name: "Hratch Ghanime",
   tagline: "Software Engineer \u2022 Data Science @ UCSB",
-  intro: "Hey there, I'm Hratch a senior at UCSB. My socials are below!",
+  intro: "Hey there, I'm Hratch a UCSB graduate. My socials are below!",
   email: "hratchghanime@gmail.com",
   github: "https://github.com/hratchg",
   linkedin: "https://www.linkedin.com/in/hghanime",
@@ -44,7 +44,7 @@ export const personalInfo = {
 };
 
 export const aboutInfo = {
-  bio: "I'm a Data Science student at UC Santa Barbara with a deep passion for software engineering and building products that solve real problems. My journey in tech has taken me from developing full-stack applications to designing data pipelines and exploring machine learning.",
+  bio: "I'm a Data Science graduate from UC Santa Barbara with a deep passion for software engineering and building products that solve real problems. My journey in tech has taken me from developing full-stack applications to designing data pipelines and exploring machine learning.",
   currentFocus: "Currently focused on building scalable web applications and exploring the intersection of data engineering and product development.",
   education: {
     school: "University of California, Santa Barbara (UCSB)",
