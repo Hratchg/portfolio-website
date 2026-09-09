@@ -277,9 +277,9 @@ export default function ExperiencePage() {
 
             <EditableList table="experiences" onAdd={handleAddExperience} addLabel="Add Experience">
               <div className="space-y-16">
-                {experiences.map((exp) => (
+                {experiences.map((exp, i) => (
+                  <RevealFx key={exp.id} delay={0.75 + i * 0.15} translateY={20}>
                   <div
-                    key={exp.id}
                     data-testid={`card-experience-${exp.id}`}
                     className={`relative group ${isDeleted("experiences", exp.id) ? "opacity-50 pointer-events-none" : ""}`}
                   >
@@ -317,6 +317,7 @@ export default function ExperiencePage() {
 
                     <EditableBullets bullets={exp.bullets as string[]} table="experiences" id={exp.id} field="bullets" />
                   </div>
+                  </RevealFx>
                 ))}
               </div>
             </EditableList>
