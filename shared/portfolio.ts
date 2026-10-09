@@ -208,20 +208,6 @@ export const experiences: Experience[] = [
     sortOrder: 0,
   },
   {
-    id: "exp-maincard-ufc",
-    role: "Data Engineer Intern",
-    organization: "MainCard – Fantasy UFC platform",
-    location: "Remote",
-    startDate: "April 2026",
-    endDate: "September 2026",
-    bullets: [
-      "Created a UFC fight-prediction system in Python, building the core modeling workflow, feature engineering logic, and Elo-based fighter ranking system to evaluate matchups from fight data, fighter statistics, and betting-market information.",
-      "Developed data scrapers and preprocessing workflows for UFCStats, Sherdog, and BestFightOdds, turning raw fighter, fight, and odds data into features for model training.",
-      "Corrected a critical label-ordering issue that inflated model accuracy, improving the pipeline and reported evaluation metrics.",
-    ],
-    sortOrder: 1,
-  },
-  {
     id: "exp-coursepick",
     role: "Founder & Full-Stack Developer",
     organization: "CoursePick",
@@ -233,7 +219,7 @@ export const experiences: Experience[] = [
       "Created a multi-pass professor matching pipeline and a VADER + TF-IDF sentiment layer over scraped RMP GraphQL data and official UCSB grade CSVs, persisted to PostgreSQL.",
       "Deployed a 3-service Docker Compose stack (Postgres, Streamlit, APScheduler) on Neon-managed Postgres with GitHub Actions for CI gating, nightly schedule sync, and weekly DB backups.",
     ],
-    sortOrder: 2,
+    sortOrder: 1,
   },
   {
     id: "exp-lastbite",
@@ -247,7 +233,7 @@ export const experiences: Experience[] = [
       "Architected a multi-role platform (customer, restaurant owner, admin) with NextAuth authentication, Stripe subscription billing, and a custom analytics dashboard with real-time revenue and category breakdowns via Recharts.",
       "Achieved successful beta rollout with 100+ student users and reduced average daily surplus waste across participating restaurants by an estimated 10-15%",
     ],
-    sortOrder: 3,
+    sortOrder: 2,
   },
   {
     id: "92f293f4-f121-47a0-aa56-c0910081214f",
@@ -261,7 +247,7 @@ export const experiences: Experience[] = [
       "Integrated secure payment gateways and streamlined online transaction processes, significantly expanding the business's customer reach and online sales capabilities.",
       "Optimized the site for usability and performance, ensuring a smooth customer experience across desktop and mobile devices.",
     ],
-    sortOrder: 4,
+    sortOrder: 3,
   },
   {
     id: "exp-3",
@@ -275,7 +261,7 @@ export const experiences: Experience[] = [
       "Collaborated with engineers and therapists to collect and analyze user feedback data, applying predictive modeling to improve design and safety features.",
       "Utilized CAD software to prototype designs and integrated real-time data analysis for performance testing.",
     ],
-    sortOrder: 5,
+    sortOrder: 4,
   },
   {
     id: "d5cbd62d-3230-4029-9aa9-5d495e9f3bf8",
@@ -289,7 +275,7 @@ export const experiences: Experience[] = [
       "Collaborated with engineers to improve the scalability and performance of live Q&A streaming features, directly enhancing the experience for large concurrent audiences.",
       "Contributed to production codebases through debugging, code optimization, and iterative refinement shipping improvements alongside a cross-functional engineering team.",
     ],
-    sortOrder: 6,
+    sortOrder: 5,
   },
 ];
 
