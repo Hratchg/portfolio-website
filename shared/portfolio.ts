@@ -122,13 +122,13 @@ export const projects: Project[] = [
   {
     id: "swiftscreen",
     title: "SwiftScreen",
-    description: "Resume screener built at UCSB DataOrbit 2025. Embeds resumes with sentence transformers and ranks applicants against a job's required skills.",
+    description: "Resume screener built at UCSB DataOrbit 2025. Type a job description and it scores ~9,500 resumes from 0 to 10 and shows the best and worst matches.",
     highlights: [
       "MiniLM sentence embeddings of full resume text",
-      "PyTorch feed-forward model scores resume to job fit",
-      "Interactive notebook UI for recruiters to filter and rank candidates",
+      "Weighted scoring from fuzzy skill match, experience, major and GPA",
+      "Interactive notebook widget for recruiters to search and rank candidates",
     ],
-    techStack: ["Python", "PyTorch", "Sentence Transformers", "scikit-learn"],
+    techStack: ["Python", "Sentence Transformers", "pandas", "PyTorch", "ipywidgets"],
     category: "ML,Data",
     featured: true,
     githubUrl: "https://github.com/Hratchg/SwiftScreen_DataOrbit2025",
