@@ -84,6 +84,7 @@ export const projects: Project[] = [
     techStack: ["React", "TypeScript", "three.js", "FastAPI", "PostgreSQL"],
     category: "SWE,Data",
     featured: true,
+    githubUrl: "https://github.com/Hratchg/coursepick",
     liveUrl: "https://coursepick.app",
     sortOrder: 0,
   },
