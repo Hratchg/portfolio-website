@@ -1,4 +1,4 @@
-import { ArrowRight, Github, FileText, Mail } from "lucide-react";
+import { ArrowRight, Briefcase, Github, FileText, Mail } from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -10,11 +10,14 @@ import { RevealFx } from "@/components/reveal-fx";
 import { Sparkles, Target, Loader2 } from "lucide-react";
 import { useContent } from "@/lib/use-content";
 import { Editable } from "@/components/editable";
-import type { PersonalInfo, AboutInfo } from "@/lib/types";
+import { ProjectCard } from "@/components/project-card";
+import type { PersonalInfo, AboutInfo, Project } from "@/lib/types";
 
 export default function AboutPage() {
   const { data: personalInfo, isLoading: piLoading } = useContent<PersonalInfo>("/api/content/personal-info");
   const { data: aboutInfo, isLoading: aiLoading } = useContent<AboutInfo>("/api/content/about");
+  const { data: projectsData } = useContent<Project[]>("/api/content/projects");
+  const featuredProjects = (projectsData ?? []).filter((p) => p.featured).slice(0, 4);
 
   if (piLoading || aiLoading || !personalInfo || !aboutInfo) {
     return (
@@ -31,7 +34,7 @@ export default function AboutPage() {
         <section className="relative min-h-[70vh] flex items-center justify-center pt-16">
           <div className="max-w-6xl mx-auto px-6 py-16 text-center">
             <div className="space-y-6">
-              <RevealFx delay={0} translateY={20}>
+              <RevealFx delay={0} translateY={20} speed="fast">
               <Editable
                 value={personalInfo.name}
                 table="personal_info"
@@ -42,7 +45,7 @@ export default function AboutPage() {
                 data-testid="text-hero-name"
               />
               </RevealFx>
-              <RevealFx delay={0.2} translateY={24}>
+              <RevealFx delay={0.1} translateY={24} speed="fast">
               <Editable
                 value={personalInfo.tagline}
                 table="personal_info"
@@ -53,7 +56,7 @@ export default function AboutPage() {
                 data-testid="text-hero-tagline"
               />
               </RevealFx>
-              <RevealFx delay={0.4} translateY={28}>
+              <RevealFx delay={0.2} translateY={28} speed="fast">
               <Editable
                 value={personalInfo.intro}
                 table="personal_info"
@@ -66,12 +69,18 @@ export default function AboutPage() {
               </RevealFx>
             </div>
 
-            <RevealFx delay={0.6} translateY={20}>
+            <RevealFx delay={0.3} translateY={20} speed="fast">
             <div className="flex flex-wrap items-center justify-center gap-4 mt-12">
-              <Button size="lg" asChild data-testid="button-view-experience">
-                <Link href="/experience">
-                  View Experience
+              <Button size="lg" asChild data-testid="button-view-projects">
+                <a href="#projects">
+                  See My Projects
                   <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" asChild data-testid="button-view-experience">
+                <Link href="/experience">
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  Experience
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild data-testid="button-github">
@@ -89,7 +98,7 @@ export default function AboutPage() {
             </div>
             </RevealFx>
 
-            <RevealFx delay={0.8} translateY={16}>
+            <RevealFx delay={0.4} translateY={16} speed="fast">
             <div className="flex justify-center gap-4 mt-8">
               <Button size="icon" variant="ghost" asChild aria-label="LinkedIn" data-testid="button-linkedin">
                 <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
@@ -106,7 +115,30 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <RevealFx delay={1.0} translateY={32}>
+        {featuredProjects.length > 0 && (
+          <RevealFx delay={0.3} translateY={32}>
+          <section id="projects" className="py-16 md:py-24 scroll-mt-20">
+            <div className="max-w-6xl mx-auto px-6">
+              <div className="flex flex-wrap items-end justify-between gap-4 mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold" data-testid="text-featured-heading">
+                  Featured Projects
+                </h2>
+                <Link href="/projects" className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center">
+                  All projects
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                {featuredProjects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
+              </div>
+            </div>
+          </section>
+          </RevealFx>
+        )}
+
+        <RevealFx delay={0.2} translateY={32}>
         <section id="about" className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-bold mb-12" data-testid="text-about-heading">
